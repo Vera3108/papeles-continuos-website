@@ -33,3 +33,9 @@ collections:
                 label: Tags
                 required: true
                 widget: text
+      - label: Tags
+        name: tags
+        file: static/content/tags.json
+        fields:
+          - { name: tags, label: tags, required: true, widget: text }
+
