@@ -55,9 +55,11 @@ export default {
     .author
       font-weight: bold
       color: black
+      transition: all 0.15s ease-in-out
 
     .author-selected
       color: #FFFF84
+      transition: all 0.15s ease-in-out
       text-shadow: 0px 1px 0 #5B5B46, 0px -1px 0 #5B5B46, 1px 0px 0 #5B5B46, -1px 0px 0 #5B5B46, -1px 1px 0 #5B5B46, 1px 1px 0 #5B5B46, -1px -1px 0 #5B5B46, 1px -1px 0 #5B5B46
 
     .date

@@ -41,9 +41,11 @@ export default {
     border: 1px solid #898A7D
     padding: 2px 4px
     cursor: pointer
+    transition: all 0.15s ease-in-out
 
   .selected
-    background: #ccd6ed
+    background: #b7abff
+    transition: all 0.15s ease-in-out
 
   .amount
     display: inline-block

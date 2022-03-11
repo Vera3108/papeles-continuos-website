@@ -69,19 +69,19 @@ export default {
     #menu
       height: 100%
       position: relative
-      padding-top: 80px
+      padding-top: 35px
       padding-left: 20px
       flex: 0 0 350px
 
     #content
       width: 100%
       height: 100%
-      padding: 80px 100px 80px 0
+      padding: 40px 100px 65px 0
 
   #at
     position: absolute
     left: 50px
-    bottom: 75px
+    bottom: 30px
     font-size: 14px
     color: black
 
@@ -99,7 +99,7 @@ export default {
   #download
     position: absolute
     right: 35px
-    bottom: 74px
+    bottom: 59px
     width: 50px
     height: 50px
     z-index: 2
@@ -112,7 +112,7 @@ export default {
   #undo
     position: absolute
     right: 38px
-    bottom: 130px
+    bottom: 112px
     width: 42px
     height: 40px
     z-index: 2

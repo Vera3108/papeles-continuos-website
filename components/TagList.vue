@@ -86,7 +86,7 @@ export default {
 <style lang="sass">
 #tag-list
   position: absolute
-  bottom: 125px
+  bottom: 90px
   left: 50px
 
   .tag-list-container
