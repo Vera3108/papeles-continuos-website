@@ -12,24 +12,24 @@ collections:
     name: "papelescontinuos"
     format: json
     files:
-      - name: "books"
-        label: "PDFs"
+      - label: PDFs
+        name: "books"
         file: static/content/books.json
         fields:
-          - { name: id, label: Id, required: true, widget: text }
-          - { name: author, label: Autor, required: true, widget: text }
-          - { name: url, label: Archivo, required: true, widget: file }
-          - name: date
-            label: Fecha
-            required: true
-            widget: date
-            default: ""
-            format: "DD MM YYYY"
-          - name: tags
-            label: Tags
-            required: true
+          - label: Libros
+            name: books
             widget: list
-            default: ""
-            allow_add: true
-            field: { name: tag, label: Tag, required: true, widget: text }
-
+            fields:
+              - { name: id, label: Id, required: true, widget: text }
+              - { name: author, label: Autor, required: true, widget: text }
+              - { name: url, label: Archivo, required: true, widget: file }
+              - name: date
+                label: Fecha
+                required: true
+                widget: date
+                default: ""
+                format: "DD MM YYYY"
+              - name: tags
+                label: Tags
+                required: true
+                widget: text
