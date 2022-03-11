@@ -22,6 +22,6 @@ export default {
 	modules: [ '@nuxtjs/axios' ],
 	build: {},
 	env: {
-		baseURL: process.env.NODE_ENV === 'production' ? 'https://papeles-continuos.web.app' : 'http://localhost:3000'
+		baseURL: process.env.NODE_ENV === 'production' ? 'https://papeles-continuos.netlify.app' : 'http://localhost:3000'
 	}
 }
