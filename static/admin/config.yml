@@ -12,11 +12,11 @@ collections:
     name: "papelescontinuos"
     format: json
     files:
-      - label: PDFs
+      - label: PDF's
         name: "books"
         file: static/content/books.json
         fields:
-          - label: Libros
+          - label: PDF
             name: books
             widget: list
             fields:
