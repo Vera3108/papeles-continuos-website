@@ -26,7 +26,7 @@ export default {
       for (let i = 0; i < tagsInfo.length; i++) {
         let tag = {}
         tag.name = tagsInfo[i]
-        tag.amount = books.filter((book) => book.tags.includes(tag.name)).length
+        tag.amount = books.filter((book) => book.tags.split('\n').includes(tag.name)).length
         tags.push(tag)
       }
 

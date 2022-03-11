@@ -32,7 +32,7 @@ export const mutations = {
 		// select first visible book
 		let isCurrentBookInCurrentTags = false
 		let book = state.books.find((book) => book.id === state.selectedBook)
-		for (let tag of book.tags) {
+		for (let tag of book.split('\n')) {
 			if (state.selectedTags.includes(tag)) {
 				isCurrentBookInCurrentTags = true
 				break
@@ -53,7 +53,7 @@ export const mutations = {
 		// select first visible book
 		let isCurrentBookInCurrentTags = false
 		let book = state.books.find((book) => book.id === state.selectedBook)
-		for (let tag of book.tags) {
+		for (let tag of book.tags.split('\n')) {
 			if (state.selectedTags.includes(tag)) {
 				isCurrentBookInCurrentTags = true
 				break
@@ -62,7 +62,7 @@ export const mutations = {
 
 		if (!isCurrentBookInCurrentTags) {
 			let filteredBooks = state.books.filter((book) => {
-				return book.tags.includes(tag)
+				return book.tags.split('\n').includes(tag)
 			})
 			state.selectedBook = filteredBooks[0].id
 		}
