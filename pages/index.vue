@@ -17,8 +17,24 @@
 <script>
 export default {
   async mounted() {
-    let dataBooks = await this.$axios.$get(process.env.baseURL + '/content/books.json')
-    let dataTags = await this.$axios.$get(process.env.baseURL + '/content/tags.json')
+    let dataBooks = await this.$axios.$get(
+      process.env.baseURL + '/content/books.json',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+    )
+    let dataTags = await this.$axios.$get(
+      process.env.baseURL + '/content/tags.json',
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+        },
+      }
+    )
     this.$store.commit('setBooks', dataBooks.books)
     this.$store.commit('setTags', dataTags.tags)
     this.$store.commit('setSelectedBook', dataBooks.books[0].id)
