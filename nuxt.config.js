@@ -13,7 +13,7 @@ export default {
 			{ name: 'format-detection', content: 'telephone=no' }
 		],
 		link: [ { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' } ],
-		script: []
+		script: [ { src: 'https://identity.netlify.com/v1/netlify-identity-widget.js' }, {src:'lib/netlify.js'} ]
 	},
 	css: [],
 	plugins: [],
@@ -22,6 +22,7 @@ export default {
 	modules: [ '@nuxtjs/axios' ],
 	build: {},
 	env: {
-		baseURL: process.env.NODE_ENV === 'production' ? 'https://papeles-continuos.netlify.app' : 'http://localhost:3000'
+		baseURL:
+			process.env.NODE_ENV === 'production' ? 'https://papeles-continuos.netlify.app' : 'http://localhost:3000'
 	}
 }
