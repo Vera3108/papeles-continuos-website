@@ -24,7 +24,7 @@ export default {
       process.env.baseURL + '/content/tags.json'
     )
     this.$store.commit('setBooks', dataBooks.books)
-    this.$store.commit('setTags', dataTags.tags)
+    this.$store.commit('setTags', dataTags.tags.split('\n'))
     this.$store.commit('setSelectedBook', dataBooks.books[0].id)
   },
 
