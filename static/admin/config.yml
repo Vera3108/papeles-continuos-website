@@ -1,8 +1,9 @@
 backend:
   name: git-gateway
+  repo: https://github.com/Vera3108/papeles-continuos-website
   branch: master
 display_url: https://papeles-continuos.web.app
-logo_url: https://papeles-continuos.web.app/images/logo.svg
+logo_url: https://papeles-continuos.netlify.app/images/logo.svg
 media_folder: "static/images/uploads"
 public_folder: "/images/uploads"
 
