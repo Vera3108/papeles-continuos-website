@@ -1,0 +1,32 @@
+{
+	"books": [
+		{
+			"id": "cage-filliou",
+			"author": "Paulo Dam",
+			"url": "./books/cage-filliou.pdf",
+			"date": "05-01-2022",
+			"tags": [ "arquitectura", "diseño", "comunicación", "educación" ]
+		},
+		{
+			"id": "estetica",
+			"author": "Teresa Benardeti",
+			"url": "./books/estetica.pdf",
+			"date": "05-01-2022",
+			"tags": [ "arquitectura", "arte", "multimedia" ]
+		},
+		{
+			"id": "insectos",
+			"author": "Claudia Jiménez",
+			"url": "./books/insectos.pdf",
+			"date": "05-01-2022",
+			"tags": [ "diseño", "comunicación" ]
+		},
+		{
+			"id": "tsp",
+			"author": "Giuliana Vidarte",
+			"url": "./books/tsp.pdf",
+			"date": "05-01-2022",
+			"tags": [ "arquitectura", "comunicación", "test" ]
+		}
+	]
+}

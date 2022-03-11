@@ -1,0 +1,34 @@
+backend:
+  name: git-gateway
+  branch: master
+display_url: https://papeles-continuos.web.app
+logo_url: https://papeles-continuos.web.app/images/logo-netlify.svg
+media_folder: "static/images/uploads"
+public_folder: "/images/uploads"
+
+collections:
+  - label: "Papeles Continuos"
+    name: "papelescontinuos"
+    format: json
+    files:
+      - name: "books"
+        label: "PDFs"
+        file: static/content/books.json
+        fields:
+          - { name: id, label: Id, required: true, widget: text }
+          - { name: author, label: Autor, required: true, widget: text }
+          - { name: url, label: Archivo, required: true, widget: file }
+          - name: date
+            label: Fecha
+            required: true
+            widget: date
+            default: ""
+            format: "DD MM YYYY"
+          - name: tags
+            label: Tags
+            required: true
+            widget: list
+            default: ""
+            allow_add: true
+            field: { name: tag, label: Tag, required: true, widget: text }
+
