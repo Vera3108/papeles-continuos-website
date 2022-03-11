@@ -5,44 +5,28 @@
       "author": "Paulo Dam",
       "url": "/images/uploads/cage-filliou.pdf",
       "date": "05-01-2022",
-      "tags": [
-        "arquitectura",
-        "diseño",
-        "comunicación",
-        "educación"
-      ]
+      "tags": "arquitectura\ndiseño\ncomunicación\neducación"
     },
     {
       "id": "estetica",
       "author": "Teresa Benardeti",
       "url": "/images/uploads/estetica.pdf",
       "date": "05-01-2022",
-      "tags": [
-        "arquitectura",
-        "arte",
-        "multimedia"
-      ]
+      "tags": "arquitectura\narte\nmultimedia"
     },
     {
       "id": "insectos",
       "author": "Claudia Jiménez",
       "url": "/images/uploads/insectos.pdf",
       "date": "05-01-2022",
-      "tags": [
-        "diseño",
-        "comunicación"
-      ]
+      "tags": "diseño\ncomunicación"
     },
     {
       "id": "tsp",
       "author": "Giuliana Vidarte",
       "url": "/images/uploads/tsp.pdf",
       "date": "05-01-2022",
-      "tags": [
-        "arquitectura",
-        "comunicación",
-        "test"
-      ]
+      "tags": "arquitectura\ncomunicación\ntest"
     }
   ]
 }
