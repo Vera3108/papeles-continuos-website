@@ -13,8 +13,7 @@
     #at @v.jimenezaraujo
     #download(@click='onDownloadClick()')
     #undo(@click='onUndoClick()')
-  mobile(v-if="isMobile")
-    
+  mobile(v-else)
 </template>
 
 <script>
@@ -33,7 +32,7 @@ export default {
 
   computed: {
     isMobile() {
-      return true
+      // return false
       return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     }
   },
