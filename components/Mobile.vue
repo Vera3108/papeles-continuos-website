@@ -35,7 +35,7 @@ export default {
     margin: 0 auto
 
   .title
-    position: absolute
+    position: fixed
     top: 50%
     left: 50%
     transform: translate(-50%, -50%)
@@ -44,7 +44,7 @@ export default {
     pointer-events: none
 
   .link
-    position: absolute
+    position: fixed
     bottom: 7vw
     left: 50%
     transform: translateX(-50%)
