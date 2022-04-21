@@ -1,32 +1,3 @@
 {
-  "books": [
-    {
-      "id": "cage-filliou",
-      "author": "Paulo Dam",
-      "url": "/images/uploads/ginzburg_huellas_raices_de_un_paradigma_indiciario-copy.pdf",
-      "date": "05-01-2022",
-      "tags": "arquitectura\ndiseño\ncomunicación\neducación\nfilosofía"
-    },
-    {
-      "id": "estetica",
-      "author": "Teresa Benardeti",
-      "url": "/images/uploads/estetica.pdf",
-      "date": "05-01-2022",
-      "tags": "arquitectura\narte\nmultimedia"
-    },
-    {
-      "id": "insectos",
-      "author": "Claudia Jiménez",
-      "url": "/images/uploads/insectos.pdf",
-      "date": "05-01-2022",
-      "tags": "diseño\ncomunicación"
-    },
-    {
-      "id": "tsp",
-      "author": "Giuliana Vidarte",
-      "url": "/images/uploads/tsp.pdf",
-      "date": "05-01-2022",
-      "tags": "arquitectura\ncomunicación\ntest"
-    }
-  ]
+  "books": []
 }
