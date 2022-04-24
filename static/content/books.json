@@ -1,3 +1,11 @@
 {
-  "books": []
+  "books": [
+    {
+      "date": "24 04 2022",
+      "id": "Presentación",
+      "author": "Vera Lucía Jiménez",
+      "url": "/images/uploads/presentación.pdf",
+      "tags": "Presentación"
+    }
+  ]
 }
