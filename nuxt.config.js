@@ -25,11 +25,7 @@ export default {
   modules: ['@nuxtjs/axios'],
   build: {},
   env: {
-    baseURL:
-      process.env.NODE_ENV === 'production'
-        ? 'https://papelescontinuos.info'
-        : // ? 'http://localhost:3000'
-          // ? 'https://papelescontinuos.info'
-          'https://papelescontinuos.info',
+    baseURL:'https://papelescontinuos.info'
+    // baseURL:'http://localhost:3000'
   },
 }

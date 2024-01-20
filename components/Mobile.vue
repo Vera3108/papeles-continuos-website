@@ -14,11 +14,8 @@ export default {}
 #mobile
   display: grid
   grid-template-rows: 50px 40vh auto 40vh 40px
-  // display: flex
-  // flex-direction: column
   height: 100vh
   width: 100%
-  // background-color: #FFFEE8
   overflow: hidden
 
   #at
