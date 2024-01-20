@@ -43,6 +43,7 @@ export default {}
 body
   margin: 0 !important
   font-family: 'Aktiv Grotesk Bold'
+  background-color: #FFFEE8
 
 body,
 html

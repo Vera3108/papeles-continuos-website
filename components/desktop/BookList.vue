@@ -1,7 +1,7 @@
 <template lang="pug">
-#book-list
+#book-list-desktop
   template(v-for='book in books')
-    book(:book='book', v-show='book.id == selectedBook')
+    desktop-book(:book='book', v-show='book.id == selectedBook')
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
 </script>
 
 <style lang="sass">
-#book-list
+#book-list-desktop
   margin: auto
   width: 100%
   height: 100%

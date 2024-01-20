@@ -1,11 +1,11 @@
 <template lang="pug">
-#tag-list
+#tag-list-desktop
   .tag-list-container
     .title Por temas
     .tag-list-outter(@wheel.prevent='onTagListWheel')
       .tag-list-inner
         template(v-for='tag in tags')
-          tag(:name='tag.name', :amount='tag.amount', v-show='tag.amount > 0')
+          desktop-tag(:name='tag.name', :amount='tag.amount', v-show='tag.amount > 0')
   .tag-list-scrollbar-outter
   .tag-list-scrollbar-inner
 </template>
@@ -83,14 +83,14 @@ export default {
 }
 </script>
 
-<style lang="sass">
-#tag-list
+<style lang="sass" scoped>
+#tag-list-desktop
   position: absolute
-  bottom: 90px
+  bottom: 80px
   left: 50px
 
   .tag-list-container
-    max-height: 90px
+    max-height: 250px
 
     .title
       font-size: 14px

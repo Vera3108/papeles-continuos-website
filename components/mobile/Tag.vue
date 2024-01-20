@@ -27,12 +27,12 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .tag
-  font-size: 14px
-  display: inline-block
-  width: 120px
-  margin-right: 20px
+  font-size: 20px
+  display: block
+  width: 50%
+  margin-right: 60px
   margin-bottom: 5px
 
   .name

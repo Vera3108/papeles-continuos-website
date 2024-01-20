@@ -1,5 +1,5 @@
 <template lang="pug">
-.item(@click='onBookClick(id)', v-show='hasTagsSelected')
+.book-item-desktop(@click='onBookClick(id)', v-show='hasTagsSelected')
   .bullet
     img(src='~/assets/images/bullet.svg')
   .info
@@ -38,7 +38,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.item
+.book-item-desktop
   display: flex
   padding-bottom: 12px
 

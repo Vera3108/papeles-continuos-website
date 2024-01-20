@@ -1,9 +1,9 @@
 <template lang="pug">
-#book-item-list
+#book-item-list-desktop
   .book-item-list-container(@wheel.prevent='onBookListWheel')
     ul.book-list-inner
       li(v-for='book in this.$store.state.books', :key='book.id')
-        book-item(
+        desktop-book-item(
           :author='book.author',
           :date='book.date',
           :id='book.id',
@@ -80,7 +80,7 @@ export default {
 </script>
 
 <style lang="sass">
-#book-item-list
+#book-item-list-desktop
   position: relative
 
   .book-item-list-container

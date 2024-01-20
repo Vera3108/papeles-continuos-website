@@ -1,11 +1,11 @@
 <template lang="pug">
-.book(:id='"book-" + book.id')
+.book-desktop(:id='"book-" + book.id')
   .container(:id='"page-container-" + book.id')
 </template>
 
 <script>
 import p5 from 'p5'
-import { Point, Line } from '../static/lib/geometry'
+import { Point, Line } from '../../static/lib/geometry'
 import pdfjsLib from 'pdfjs-dist/build/pdf'
 import { PDFDocument, rgb } from 'pdf-lib'
 pdfjsLib.GlobalWorkerOptions.workerSrc =
@@ -290,7 +290,7 @@ export default {
 </script>
 
 <style lang="sass">
-.book
+.book-desktop
   display: block
   .container
     overflow: auto

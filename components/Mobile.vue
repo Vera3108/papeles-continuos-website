@@ -1,61 +1,30 @@
 <template lang="pug">
 #mobile
-  template(v-for='i in 55')
-    img(:src='"~/static/images/mobile/" + i + ".jpg"')
-  .title
-    div Papeles Continuos
-  .link
-    p No hay nada que ver aquí <br> mejor ve a tu laptop
-    a(href="") @v.jimenezaraujo
+  mobile-header
+  mobile-book-item-list
+  .space
+  mobile-tag-list
+  #at @vjimenezaraujo
 </template>
 <script>
-
-export default {
-  mounted() {
-    // set random widths for each image
-    let images = document.querySelectorAll('#mobile img')
-    for (let i = 0; i < images.length; i++) {
-      images[i].style.width = Math.floor(40 + Math.random() * 60) + '%'
-    }
-  },  
-}
+export default {}
 </script>
 
 <style lang="sass" scoped>
 #mobile
+  display: grid
+  grid-template-rows: 50px 40vh auto 40vh 40px
+  // display: flex
+  // flex-direction: column
+  height: 100vh
   width: 100%
-  height: 100%
-  background-color: #FFFEE8
-  overflow: scroll
-  position: relative
+  // background-color: #FFFEE8
+  overflow: hidden
 
-  img
-    max-width: 80%
-    display: block
-    margin: 0 auto
-
-  .title
-    position: fixed
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-    text-align: center
-    font-size: 8vw
-    pointer-events: none
-
-  .link
-    position: fixed
-    bottom: 7vw
-    left: 50%
-    transform: translateX(-50%)
-    font-size: 3.9vw
-    text-align: center
-    pointer-events: none
-
-    p
-      margin: 0
-
-    a
-      pointer-events: auto
-      color: #000
+  #at
+    height: 30px
+    padding-top: 10px
+    position: absolute
+    bottom: 10px
+    left: 10px
 </style>
