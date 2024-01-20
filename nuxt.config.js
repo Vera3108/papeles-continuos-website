@@ -27,8 +27,9 @@ export default {
   env: {
     baseURL:
       process.env.NODE_ENV === 'production'
-        ? 'http://localhost:3000'
-        : // ? 'https://papelescontinuos.info'
-          'http://localhost:3000',
+        ? 'https://papelescontinuos.info'
+        : // ? 'http://localhost:3000'
+          // ? 'https://papelescontinuos.info'
+          'https://papelescontinuos.info',
   },
 }

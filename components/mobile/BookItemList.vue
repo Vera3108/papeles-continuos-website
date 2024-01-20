@@ -7,13 +7,6 @@ ul.book-list-inner#book-item-list-mobile
       :id='book.id',
       :isSelected='book.id == selectedBook'
     )
-  li(v-for='book in this.$store.state.books', :key='book.id')
-    mobile-book-item(
-      :author='book.author',
-      :date='book.date',
-      :id='book.id',
-      :isSelected='book.id == selectedBook'
-    )
 </template>
 
 <script>
