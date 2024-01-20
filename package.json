@@ -28,6 +28,6 @@
     "netlify-cms-app": "^2.15.68"
   },
   "engines": {
-    "node": "14.18.0"
+    "node": "14"
   }
 }
