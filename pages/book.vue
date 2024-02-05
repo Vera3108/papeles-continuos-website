@@ -1,14 +1,19 @@
 <template lang="pug">
 #book
   mobile-header
+  iframe.book(:src="'https://docs.google.com/viewer?url=https://papelescontinuos.info' + book[0]?.url + '&embedded=true'" frameborder="0")
   //- iframe.book(:src="book[0].url" type="application/pdf")
-  //- p.book {{ "https://papelescontinuos.info" + book[0].url }}
-  iframe.book(:src="'https://docs.google.com/viewer?url=https://papelescontinuos.info' + book[0].url + '&embedded=true'" frameborder="0")
   //- iframe.book(:src="'https://papelescontinuos.info' + book[0].url" frameborder="0")
 </template>
 
 <script>
 export default {
+  mounted() {
+    console.log(this.book[0])
+    if(!this.book[0]) {
+      this.$router.go(-1)
+    }
+  },
   computed: {
     book() {
       return this.$store.state.books.filter((book) => {

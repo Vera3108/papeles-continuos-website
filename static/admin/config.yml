@@ -4,16 +4,16 @@ backend:
   branch: main
 display_url: https://papeles-continuos.web.app
 logo_url: https://papeles-continuos.netlify.app/images/logo.svg
-media_folder: "static/images/uploads"
-public_folder: "/images/uploads"
+media_folder: 'static/images/uploads'
+public_folder: '/images/uploads'
 
 collections:
-  - label: "Papeles Continuos"
-    name: "papelescontinuos"
+  - label: 'Papeles Continuos'
+    name: 'papelescontinuos'
     format: json
     files:
       - label: PDF's
-        name: "books"
+        name: 'books'
         file: static/content/books.json
         fields:
           - label: PDF
@@ -23,12 +23,13 @@ collections:
               - { name: id, label: Id, required: true, widget: text }
               - { name: author, label: Autor, required: true, widget: text }
               - { name: url, label: Archivo, required: true, widget: file }
+              - { name: thumbnail, label: Miniatura, required: true, widget: image }
               - name: date
                 label: Fecha
                 required: true
                 widget: date
-                default: ""
-                format: "DD MM YYYY"
+                default: ''
+                format: 'DD MM YYYY'
               - name: tags
                 label: Tags
                 required: true
@@ -38,4 +39,3 @@ collections:
         file: static/content/tags.json
         fields:
           - { name: tags, label: tags, required: true, widget: text }
-

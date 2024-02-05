@@ -1,7 +1,7 @@
 <template lang="pug">
 .book-item-desktop(v-show='hasTagsSelected')
   .thumbnail(@click='onBookClick(id)')
-    img(src='~/assets/images/empty.svg')
+    img(:src="thumbnail")
   .author(:class='{ "author-selected": isSelected }', @click='onBookClick(id)') {{ author }}
   .date(@click='onBookClick(id)') {{ date }}
   a.download(:href="getBook(id)", :download="getName(id)")
@@ -9,13 +9,11 @@
 </template>
 <script>
 export default {
-  props: ['author', 'date', 'isSelected', 'id'],
+  props: ['author', 'date', 'isSelected', 'id', 'thumbnail'],
 
   computed: {
     hasTagsSelected() {
-      let bookTags = this.$store.state.books.find(
-        (book) => book.id == this.id
-      ).tags.split('\n')
+      let bookTags = this.$store.state.books.find((book) => book.id == this.id).tags.split('\n')
 
       if (this.$store.state.selectedTags.length == 0) {
         return true
@@ -85,7 +83,7 @@ export default {
     grid-column-start: 2
     grid-row-end: 3
     grid-column-end: 3
-  
+
   .download
     grid-row-start: 1
     grid-column-start: 3

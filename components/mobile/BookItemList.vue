@@ -5,7 +5,8 @@ ul.book-list-inner#book-item-list-mobile
       :author='book.author',
       :date='book.date',
       :id='book.id',
-      :isSelected='book.id == selectedBook'
+      :isSelected='book.id == selectedBook',
+      :thumbnail='book.thumbnail'
     )
 </template>
 
