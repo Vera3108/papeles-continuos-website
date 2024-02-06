@@ -5,21 +5,24 @@
       "id": "2",
       "tags": "diseño gráfico\nPerú\nAGI\ncomunicación\nidentidad\nlenguaje",
       "author": "Verónica Majluf",
-      "url": "/images/uploads/versión-final.pdf"
+      "url": "/images/uploads/versión-final.pdf",
+      "thumbnail": "/images/uploads/thumbnail.png"
     },
     {
       "date": "16 09 2022",
       "id": "3",
       "author": "Federico Pérez Villoro",
       "url": "/images/uploads/papelescontinuos_federico.pdf",
-      "tags": "tecnología\ndiseño\narte\npedagogía\n"
+      "tags": "tecnología\ndiseño\narte\npedagogía\n",
+      "thumbnail": "/images/uploads/thumbnail.png"
     },
     {
       "date": "29 04 2023",
       "id": "4",
       "author": "Verónica Devalle",
       "url": "/images/uploads/escanear_merged.pdf",
-      "tags": "historia\ndiseño gráfico\nlatinoamérica\ncrítica "
+      "tags": "historia\ndiseño gráfico\nlatinoamérica\ncrítica ",
+      "thumbnail": "/images/uploads/thumbnail.png"
     }
   ]
 }
