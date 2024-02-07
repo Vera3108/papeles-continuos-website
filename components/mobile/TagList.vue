@@ -63,6 +63,7 @@ export default {
     display: contents
 
   .scrollbar-outter
+    overflow: hidden
     grid-row: 2 / 3
     position: relative
     background-color: #FFFEE8
