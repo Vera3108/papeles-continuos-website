@@ -1,3 +1,5 @@
+import 'dotenv/config'
+
 export default {
   ssr: false,
   target: 'static',
@@ -25,7 +27,6 @@ export default {
   modules: ['@nuxtjs/axios'],
   build: {},
   env: {
-    baseURL:'https://papelescontinuos.info'
-    // baseURL:'http://localhost:3000'
+    baseURL: process.env.BASE_URL,
   },
 }

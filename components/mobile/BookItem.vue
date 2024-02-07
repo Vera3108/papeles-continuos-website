@@ -1,7 +1,7 @@
 <template lang="pug">
 .book-item-desktop(v-show='hasTagsSelected')
   .thumbnail(@click='onBookClick(id)')
-    img(:src="thumbnail")
+    .img-container(:style='{ "background-image": "url(" + thumbnail + ")" }')
   .author(:class='{ "author-selected": isSelected }', @click='onBookClick(id)') {{ author }}
   .date(@click='onBookClick(id)') {{ date }}
   a.download(:href="getBook(id)", :download="getName(id)")
@@ -13,12 +13,11 @@ export default {
 
   computed: {
     hasTagsSelected() {
-      let bookTags = this.$store.state.books.find((book) => book.id == this.id).tags.split('\n')
-
       if (this.$store.state.selectedTags.length == 0) {
         return true
       }
 
+      let bookTags = this.$store.state.books.find((book) => book.id == this.id).tags.split('\n')
       for (let tag of bookTags) {
         if (this.$store.state.selectedTags.includes(tag)) {
           return true
@@ -38,7 +37,6 @@ export default {
     },
 
     getName(id) {
-      console.log(this.$store.state.books.find((book) => book.id == id).author)
       return this.$store.state.books.find((book) => book.id == id).author
     },
   },
@@ -63,11 +61,12 @@ export default {
     grid-column-end: 1
     padding: 10px
 
-    img
+    .img-container
       width: 100%
       height: 100%
-      background-color: gray
-
+      background-size: cover
+      background-repeat: no-repeat
+      background-position: center
   .author
     color: black
     padding-top: 10px

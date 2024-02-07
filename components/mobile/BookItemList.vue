@@ -12,8 +12,6 @@ ul.book-list-inner#book-item-list-mobile
 
 <script>
 export default {
-  mounted() {},
-
   computed: {
     selectedBook() {
       return this.$store.state.selectedBook
@@ -25,7 +23,6 @@ export default {
 <style lang="sass">
 ul#book-item-list-mobile
   width: 100%
-  // max-height: 40vh
   overflow-y: scroll
   overflow-x: hidden
   position: relative

@@ -9,8 +9,7 @@
 <script>
 export default {
   mounted() {
-    console.log(this.book[0])
-    if(!this.book[0]) {
+    if (!this.book[0]) {
       this.$router.go(-1)
     }
   },
@@ -20,10 +19,6 @@ export default {
         return book.id == this.$store.state.selectedBook
       })
     },
-  },
-
-  data() {
-    return {}
   },
 }
 </script>

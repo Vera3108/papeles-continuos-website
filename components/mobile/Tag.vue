@@ -1,7 +1,8 @@
 <template lang="pug">
 .tag
-  .name(@click='onTagClick()', :class='{ selected: isSelected }') {{ name.charAt(0).toUpperCase() + name.slice(1) }}
-  .amount ({{ amount }})
+  .content
+    .name(@click='onTagClick()', :class='{ selected: isSelected }') {{ name.charAt(0).toUpperCase() + name.slice(1) }}
+    .amount ({{ amount }})
 </template>
 
 <script>
@@ -30,13 +31,25 @@ export default {
 <style lang="sass" scoped>
 .tag
   font-size: 20px
-  display: block
-  width: 50%
+  display: flex
+  justify-content: space-between
+  align-items: center
+  width: 80%
+  max-width: 250px
   margin-right: 60px
   margin-bottom: 5px
 
+  .content
+    display: flex
+    justify-content: space-between
+    align-items: center
+    width: 100%
+
+  .name, .amount
+    display: inline-flex
+    align-items: center
+
   .name
-    display: inline-block
     background: #FFFF84
     border: 1px solid #898A7D
     padding: 2px 4px

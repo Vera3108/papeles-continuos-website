@@ -4,7 +4,7 @@
   mobile-book-item-list
   .space
   mobile-tag-list
-  #at @vjimenezaraujo
+  mobile-footer
 </template>
 <script>
 export default {}
@@ -17,11 +17,4 @@ export default {}
   height: 100vh
   width: 100%
   overflow: hidden
-
-  #at
-    height: 30px
-    padding-top: 10px
-    position: absolute
-    bottom: 10px
-    left: 10px
 </style>

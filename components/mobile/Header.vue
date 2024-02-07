@@ -9,7 +9,6 @@
 export default {
   methods: {
     gotoHome() {
-      console.log('yendo')
       this.$router.push('/')
     }
   }
