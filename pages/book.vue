@@ -1,7 +1,9 @@
 <template lang="pug">
 #book
   mobile-header
-  iframe.book(:src="'https://docs.google.com/viewer?url=https://papelescontinuos.info' + book[0]?.url + '&embedded=true'" frameborder="0")
+  //- iframe.book(:src="`https://papelescontinuos.info/viewer/web/viewer.html`" frameborder="0")
+  iframe.book(:src="`https://papelescontinuos.info/viewer/web/viewer.html?file=https://papelescontinuos.info${book[0]?.url}`" frameborder="0")
+  //- p {{ `https://papelescontinuos.info/viewer/web/viewer.html?file=https://papelescontinuos.info${book[0]?.url}` }}
   //- iframe.book(:src="book[0].url" type="application/pdf")
 </template>
 
