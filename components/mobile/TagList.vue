@@ -25,8 +25,8 @@ export default {
       let contentHeight = container.scrollHeight
       let visibleHeight = container.clientHeight
       let scrollPercentage = container.scrollTop / (contentHeight - visibleHeight)
-      let scrollbarHeight = this.$refs.scrollbarOutter.clientHeight + 2
-      let scrollbarInnerHeight = this.$refs.scrollbarInner.clientHeight
+      let scrollbarHeight = this.$refs.scrollbarOutter.clientHeight
+      let scrollbarInnerHeight = this.$refs.scrollbarInner.clientHeight - 5
       let maxScrollTop = scrollbarHeight - scrollbarInnerHeight
       this.$refs.scrollbarInner.style.top = `${maxScrollTop * scrollPercentage - 1}px`
     },
