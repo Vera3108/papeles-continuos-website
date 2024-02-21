@@ -2,7 +2,7 @@
   "books": [
     {
       "date": "21 05 2022",
-      "id": "2",
+      "id": "5",
       "tags": "diseño gráfico\nPerú\nAGI\ncomunicación\nidentidad\nlenguaje",
       "author": "Verónica Majluf",
       "url": "/images/uploads/versión-final.pdf",
@@ -10,7 +10,7 @@
     },
     {
       "date": "16 09 2022",
-      "id": "3",
+      "id": "4",
       "author": "Federico Pérez Villoro",
       "url": "/images/uploads/papelescontinuos_federico.pdf",
       "tags": "tecnología\ndiseño\narte\npedagogía\n",
@@ -18,7 +18,7 @@
     },
     {
       "date": "29 04 2023",
-      "id": "4",
+      "id": "3",
       "author": "Verónica Devalle",
       "url": "/images/uploads/escanear_merged.pdf",
       "tags": "historia\ndiseño gráfico\nlatinoamérica\ncrítica ",
@@ -26,7 +26,7 @@
     },
     {
       "date": "18 02 2024",
-      "id": "5",
+      "id": "2",
       "author": "Ricardo Báez",
       "tags": "Fotografía\nDiseño editorial\nLatinoamérica\nAGI\n",
       "url": "/images/uploads/papeles-continuos_rbaez3.pdf",
