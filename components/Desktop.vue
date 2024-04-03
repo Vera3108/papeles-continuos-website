@@ -14,6 +14,20 @@
   #undo(@click='onUndoClick()')
 </template>
 
+<script>
+export default {
+  methods: {
+    onDownloadClick() {
+      this.$nuxt.$emit('download')
+    },
+
+    onUndoClick() {
+      this.$nuxt.$emit('undo')
+    },
+  },
+}
+</script>
+
 <style lang="sass">
 #desktop
   width: 100%

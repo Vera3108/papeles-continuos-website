@@ -16,8 +16,6 @@ export default {
 
   computed: {
     isMobile() {
-      // return false
-      // return /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
       let check = false
       ;(function (a) {
         if (
@@ -31,16 +29,6 @@ export default {
           check = true
       })(navigator.userAgent || navigator.vendor || window.opera)
       return check
-    },
-  },
-
-  methods: {
-    onDownloadClick() {
-      this.$nuxt.$emit('download')
-    },
-
-    onUndoClick() {
-      this.$nuxt.$emit('undo')
     },
   },
 }
