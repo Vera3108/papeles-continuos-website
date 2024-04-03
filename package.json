@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "bash -c 'source ~/.nvm/nvm.sh && nvm use 14 && nuxt'",
+    "dev": "nuxt",
     "generate": "nuxt generate"
   },
   "dependencies": {
@@ -28,6 +28,6 @@
     "netlify-cms-app": "^2.15.68"
   },
   "engines": {
-    "node": "14"
+    "node": "21.*"
   }
 }
