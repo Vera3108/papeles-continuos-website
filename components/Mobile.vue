@@ -10,18 +10,18 @@
 <script>
 export default {
   mounted() {
-    this.adjustHeight();
-    window.addEventListener('resize', this.adjustHeight);
+    this.adjustHeight()
+    window.addEventListener('resize', this.adjustHeight)
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.adjustHeight);
+    window.removeEventListener('resize', this.adjustHeight)
   },
   methods: {
     adjustHeight() {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    }
-  }
+      const vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty('--vh', `${vh}px`)
+    },
+  },
 }
 </script>
 

@@ -36,22 +36,16 @@ export default {
 
   methods: {
     onUpdate() {
-      const scrollBarOutter = document.querySelector(
-        '.tag-list-scrollbar-outter'
-      )
+      const scrollBarOutter = document.querySelector('.tag-list-scrollbar-outter')
 
-      const scrollBarInner = document.querySelector(
-        '.tag-list-scrollbar-inner'
-      )
+      const scrollBarInner = document.querySelector('.tag-list-scrollbar-inner')
 
       const tagListInner = document.querySelector('.tag-list-inner')
 
       if (tagListInner.offsetHeight > 90) {
         scrollBarOutter.style.display = 'block'
         scrollBarInner.style.display = 'block'
-        scrollBarInner.style.height = `${
-          (90 / tagListInner.offsetHeight) * 100
-        }%`
+        scrollBarInner.style.height = `${(90 / tagListInner.offsetHeight) * 100}%`
       } else {
         scrollBarOutter.style.display = 'none'
         scrollBarInner.style.display = 'none'

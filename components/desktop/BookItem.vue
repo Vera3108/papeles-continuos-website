@@ -12,9 +12,7 @@ export default {
 
   computed: {
     hasTagsSelected() {
-      let bookTags = this.$store.state.books.find(
-        (book) => book.id == this.id
-      ).tags.split('\n')
+      let bookTags = this.$store.state.books.find((book) => book.id == this.id).tags.split('\n')
 
       if (this.$store.state.selectedTags.length == 0) {
         return true

@@ -28,22 +28,16 @@ export default {
 
   methods: {
     onUpdate() {
-      const scrollBarOutter = document.querySelector(
-        '.book-item-list-scrollbar-outter'
-      )
+      const scrollBarOutter = document.querySelector('.book-item-list-scrollbar-outter')
 
-      const scrollBarInner = document.querySelector(
-        '.book-item-list-scrollbar-inner'
-      )
+      const scrollBarInner = document.querySelector('.book-item-list-scrollbar-inner')
 
       const bookListInner = document.querySelector('.book-list-inner')
 
       if (bookListInner.offsetHeight > 180) {
         scrollBarOutter.style.display = 'block'
         scrollBarInner.style.display = 'block'
-        scrollBarInner.style.height = `${
-          (180 / bookListInner.offsetHeight) * 100
-        }%`
+        scrollBarInner.style.height = `${(180 / bookListInner.offsetHeight) * 100}%`
       } else {
         scrollBarOutter.style.display = 'none'
         scrollBarInner.style.display = 'none'
@@ -63,12 +57,8 @@ export default {
 
       // update scrollbar
       let percentage = bookListOutter.scrollTop / (innerSize - outterSize)
-      let scrollbarInner = document.querySelector(
-        '.book-item-list-scrollbar-inner'
-      )
-      let scrollbarOutter = document.querySelector(
-        '.book-item-list-scrollbar-outter'
-      )
+      let scrollbarInner = document.querySelector('.book-item-list-scrollbar-inner')
+      let scrollbarOutter = document.querySelector('.book-item-list-scrollbar-outter')
       let scrollBarInnerHeight = scrollbarInner.offsetHeight
       let scrollbarOutterHeight = scrollbarOutter.offsetHeight
 

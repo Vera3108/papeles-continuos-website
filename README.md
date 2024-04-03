@@ -1,3 +1,3 @@
 # papeles-continuos
 
-- usar npm > 21.*
+- usar npm > 21.\*

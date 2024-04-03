@@ -8,8 +8,7 @@ import p5 from 'p5'
 import { Point, Line } from '../../static/lib/geometry'
 import pdfjsLib from 'pdfjs-dist/build/pdf'
 import { PDFDocument, rgb } from 'pdf-lib'
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-  'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/build/pdf.worker.min.js'
+pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/build/pdf.worker.min.js'
 
 export default {
   props: ['book'],
@@ -20,7 +19,7 @@ export default {
       page: null,
       pages: [],
       lines: [],
-      pageOrder: [], // for undo
+      pageOrder: [],
     }
   },
 
@@ -54,9 +53,7 @@ export default {
     },
 
     async download() {
-      const existingPdfBytes = await fetch(this.book.url).then((res) =>
-        res.arrayBuffer()
-      )
+      const existingPdfBytes = await fetch(this.book.url).then((res) => res.arrayBuffer())
       const pdfDoc = await PDFDocument.load(existingPdfBytes)
       const pages = pdfDoc.getPages()
 
@@ -122,14 +119,12 @@ export default {
       //     let linesInfo = JSON.parse(
       //       localStorage.getItem('book-' + this.book.id + '--page-' + index)
       //     )
-
       //     this.lines[index] = []
       //     for (let lineInfo of linesInfo) {
       //       let line = new Line(lineInfo.color)
       //       lineInfo.points.forEach((point) => {
       //         line.addPoint(new Point(point[0], point[1]))
       //       })
-
       //       this.lines[index].push(line)
       //     }
       //   }
@@ -158,9 +153,7 @@ export default {
           p.setup = () => {
             this.loadFromLocalStorageData()
 
-            let parent = document.querySelector(
-              '#page-container-' + this.book.id + '-' + i
-            )
+            let parent = document.querySelector('#page-container-' + this.book.id + '-' + i)
             let w = parent.getBoundingClientRect().width
             let h = parent.getBoundingClientRect().height
             p.createCanvas(w, h).parent(parent)
@@ -170,9 +163,7 @@ export default {
             let book = document.querySelector('#book-' + this.book.id)
             if (book.style.display == 'none') return
 
-            let page = document.querySelector(
-              '#page-container-' + this.book.id + '-' + i
-            )
+            let page = document.querySelector('#page-container-' + this.book.id + '-' + i)
             if (p.isElementOutViewport(page)) {
               return
             }
@@ -180,9 +171,7 @@ export default {
             p.resize()
 
             if (isDrawing) {
-              currentLine.addPoint(
-                new Point(p.mouseX / p.width, p.mouseY / p.height)
-              )
+              currentLine.addPoint(new Point(p.mouseX / p.width, p.mouseY / p.height))
             }
 
             currentLine.draw(p)
@@ -206,9 +195,7 @@ export default {
             this.saveOnLocalStorage()
           }
 
-          let pageContainer = document.querySelector(
-            '#page-container-' + this.book.id + '-' + i
-          )
+          let pageContainer = document.querySelector('#page-container-' + this.book.id + '-' + i)
 
           // mouse pressed
           pageContainer.addEventListener('mousedown', (e) => {
@@ -231,18 +218,11 @@ export default {
 
           p.isElementOutViewport = (el) => {
             var rect = el.getBoundingClientRect()
-            return (
-              rect.bottom < 0 ||
-              rect.right < 0 ||
-              rect.left > window.innerWidth ||
-              rect.top > window.innerHeight
-            )
+            return rect.bottom < 0 || rect.right < 0 || rect.left > window.innerWidth || rect.top > window.innerHeight
           }
 
           p.resize = () => {
-            let parent = document.querySelector(
-              '#page-container-' + this.book.id + '-' + i
-            )
+            let parent = document.querySelector('#page-container-' + this.book.id + '-' + i)
             let w = parent.getBoundingClientRect().width
             let h = parent.getBoundingClientRect().height
             p.resizeCanvas(w, h, false)
@@ -269,9 +249,7 @@ export default {
       canvasPdf.classList.add('page')
       container.appendChild(canvasPdf)
 
-      document
-        .querySelector('#page-container-' + this.book.id)
-        .appendChild(container)
+      document.querySelector('#page-container-' + this.book.id).appendChild(container)
 
       this.page = await this.pdf.getPage(pageNumber)
       let scale = this.page.getViewport(1).width / canvasPdf.width

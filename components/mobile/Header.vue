@@ -10,8 +10,8 @@ export default {
   methods: {
     gotoHome() {
       this.$router.push('/')
-    }
-  }
+    },
+  },
 }
 </script>
 
