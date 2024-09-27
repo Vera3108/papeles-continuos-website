@@ -1,6 +1,14 @@
 {
   "books": [
     {
+      "date": "28 09 2024",
+      "id": "6",
+      "author": "Bastarda",
+      "url": "/images/uploads/download-5-.pdf",
+      "thumbnail": "/images/uploads/screenshot-2024-09-27-at-11.14.40 pm.png",
+      "tags": "tipografia"
+    },
+    {
       "date": "18 02 2024",
       "id": "5",
       "author": "Ricardo Báez",
@@ -31,14 +39,6 @@
       "author": "Verónica Majluf",
       "url": "/images/uploads/versión-final.pdf",
       "thumbnail": "/images/uploads/majluf-me-you-2.jpeg"
-    },
-    {
-      "date": "27 09 2024",
-      "id": "6",
-      "url": "/images/uploads/download-5-.pdf",
-      "tags": "tipografía",
-      "thumbnail": "/images/uploads/screenshot-2024-09-27-at-11.14.40 pm.png",
-      "author": "Bastarda Type"
     }
   ]
 }
