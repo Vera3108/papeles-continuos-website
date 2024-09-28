@@ -7,7 +7,7 @@
 import p5 from 'p5'
 import { Point, Line } from '../../static/lib/geometry'
 import pdfjsLib from 'pdfjs-dist/build/pdf'
-import { PDFDocument, rgb } from 'pdf-lib'
+import { PDFDocument } from 'pdf-lib'
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/build/pdf.worker.min.js'
 
 export default {
@@ -16,8 +16,6 @@ export default {
   data() {
     return {
       pdf: null,
-      page: null,
-      pages: [],
       lines: [],
       pageOrder: [],
     }
@@ -42,53 +40,27 @@ export default {
 
   methods: {
     undo() {
-      if (this.book.id == this.$store.state.selectedBook) {
-        if (this.pageOrder.length > 0) {
-          let pageIndex = this.pageOrder.pop()
-          this.lines[pageIndex].pop()
-        }
-
-        this.saveOnLocalStorage()
+      if (this.book.id == this.$store.state.selectedBook && this.pageOrder.length > 0) {
+        let pageIndex = this.pageOrder.pop()
+        this.lines[pageIndex].pop()
       }
     },
 
     async download() {
-      const existingPdfBytes = await fetch(this.book.url).then((res) => res.arrayBuffer())
+      const existingPdfBytes = await fetch(this.book.url).then(res => res.arrayBuffer())
       const pdfDoc = await PDFDocument.load(existingPdfBytes)
-      const pages = pdfDoc.getPages()
 
-      for (let i = 0; i < pages.length; i++) {
-        const page = pages[i]
+      for (let i = 0; i < pdfDoc.getPages().length; i++) {
+        const page = pdfDoc.getPages()[i]
         const { width, height } = page.getSize()
-        this.lines[i].forEach((line) => {
-          for (let i = 0; i < line.points.length - 1; i++) {
-            let p1 = line.points[i]
-            let p2 = line.points[i + 1]
-            let c = this.hexToRgb(line.color)
-
-            if (page.getRotation().angle == 0) {
-              let p1x = p1[0] * width
-              let p1y = height - p1[1] * height
-              let p2x = p2[0] * width
-              let p2y = height - p2[1] * height
-
-              page.drawLine({
-                start: { x: p1x, y: p1y },
-                end: { x: p2x, y: p2y },
-                color: c,
-              })
-            } else {
-              let p1x = p1[0] * height
-              let p1y = p1[1] * width
-              let p2x = p2[0] * height
-              let p2y = p2[1] * width
-              page.drawLine({
-                start: { x: p1y, y: p1x },
-                end: { x: p2y, y: p2x },
-                color: c,
-              })
+        this.lines[i].forEach(line => {
+          line.points.forEach((p1, index) => {
+            if (index < line.points.length - 1) {
+              let p2 = line.points[index + 1]
+              let c = this.hexToRgb(line.color)
+              this.drawLine(page, p1, p2, width, height, c)
             }
-          }
+          })
         })
       }
 
@@ -101,44 +73,27 @@ export default {
       link.click()
     },
 
+    drawLine(page, p1, p2, width, height, color) {
+      let p1x = p1[0] * width
+      let p1y = height - p1[1] * height
+      let p2x = p2[0] * width
+      let p2y = height - p2[1] * height
+
+      page.drawLine({
+        start: { x: p1x, y: p1y },
+        end: { x: p2x, y: p2y },
+        color: color,
+      })
+    },
+
     hexToRgb(hex) {
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-      return result
-        ? {
-            type: 'RGB',
-            red: parseInt(result[1], 16) / 255,
-            green: parseInt(result[2], 16) / 255,
-            blue: parseInt(result[3], 16) / 255,
-          }
-        : null
-    },
-
-    loadFromLocalStorageData() {
-      // for (let index = 0; index < this.pdf.numPages; index++) {
-      //   if (localStorage.getItem('book-' + this.book.id + '--page-' + index)) {
-      //     let linesInfo = JSON.parse(
-      //       localStorage.getItem('book-' + this.book.id + '--page-' + index)
-      //     )
-      //     this.lines[index] = []
-      //     for (let lineInfo of linesInfo) {
-      //       let line = new Line(lineInfo.color)
-      //       lineInfo.points.forEach((point) => {
-      //         line.addPoint(new Point(point[0], point[1]))
-      //       })
-      //       this.lines[index].push(line)
-      //     }
-      //   }
-      // }
-    },
-
-    saveOnLocalStorage() {
-      // for (let index = 0; index < this.pdf.numPages; index++) {
-      //   let linesInfo = JSON.stringify(this.lines[index])
-      //   localStorage.setItem(
-      //     'book-' + this.book.id + '--page-' + index,
-      //     linesInfo
-      //   )
-      // }
+      return result ? {
+        type: 'RGB',
+        red: parseInt(result[1], 16) / 255,
+        green: parseInt(result[2], 16) / 255,
+        blue: parseInt(result[3], 16) / 255,
+      } : null
     },
 
     createCanvases() {
@@ -151,8 +106,6 @@ export default {
           let isDrawing = false
 
           p.setup = () => {
-            this.loadFromLocalStorageData()
-
             let parent = document.querySelector('#page-container-' + this.book.id + '-' + i)
             let w = parent.getBoundingClientRect().width
             let h = parent.getBoundingClientRect().height
@@ -164,9 +117,7 @@ export default {
             if (book.style.display == 'none') return
 
             let page = document.querySelector('#page-container-' + this.book.id + '-' + i)
-            if (p.isElementOutViewport(page)) {
-              return
-            }
+            if (p.isElementOutViewport(page)) return
 
             p.resize()
 
@@ -175,46 +126,25 @@ export default {
             }
 
             currentLine.draw(p)
-
-            for (let line of this.lines[i]) {
-              line.draw(p)
-            }
+            this.lines[i].forEach(line => line.draw(p))
           }
 
-          p.startLine = () => {
-            isDrawing = true
-          }
-
+          p.startLine = () => { isDrawing = true }
           p.endLine = () => {
-            if (currentLine.points.length == 0) return
-            this.lines[i].push(currentLine)
-            this.pageOrder.push(i)
-            currentColor = (currentColor + 1) % colors.length
-            currentLine = new Line(colors[currentColor])
-            isDrawing = false
-            this.saveOnLocalStorage()
+            if (currentLine.points.length > 0) {
+              this.lines[i].push(currentLine)
+              this.pageOrder.push(i)
+              currentColor = (currentColor + 1) % colors.length
+              currentLine = new Line(colors[currentColor])
+              isDrawing = false
+            }
           }
 
           let pageContainer = document.querySelector('#page-container-' + this.book.id + '-' + i)
 
-          // mouse pressed
-          pageContainer.addEventListener('mousedown', (e) => {
-            if (e.button == 0) {
-              p.startLine()
-            }
-          })
-
-          // mouse released
-          pageContainer.addEventListener('mouseup', (e) => {
-            if (e.button == 0) {
-              p.endLine()
-            }
-          })
-
-          // mouse out
-          pageContainer.addEventListener('mouseout', () => {
-            if (isDrawing) p.endLine()
-          })
+          pageContainer.addEventListener('mousedown', (e) => { if (e.button == 0) p.startLine() })
+          pageContainer.addEventListener('mouseup', (e) => { if (e.button == 0) p.endLine() })
+          pageContainer.addEventListener('mouseout', () => { if (isDrawing) p.endLine() })
 
           p.isElementOutViewport = (el) => {
             var rect = el.getBoundingClientRect()
@@ -257,10 +187,7 @@ export default {
       const context = canvasPdf.getContext('2d')
       canvasPdf.height = viewport.height
       canvasPdf.width = viewport.width
-      const renderContext = {
-        canvasContext: context,
-        viewport: viewport,
-      }
+      const renderContext = { canvasContext: context, viewport: viewport }
       await this.page.render(renderContext)
     },
   },
