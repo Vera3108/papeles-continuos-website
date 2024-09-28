@@ -29,9 +29,7 @@ export default {
   methods: {
     onUpdate() {
       const scrollBarOutter = document.querySelector('.book-item-list-scrollbar-outter')
-
       const scrollBarInner = document.querySelector('.book-item-list-scrollbar-inner')
-
       const bookListInner = document.querySelector('.book-list-inner')
 
       if (bookListInner.offsetHeight > 180) {
@@ -52,8 +50,8 @@ export default {
       let outterSize = bookListOutter.offsetHeight
       let innerSize = bookListInner.offsetHeight
 
-      // scroll content
-      bookListOutter.scrollTop += e.deltaY / 10
+      // scroll content con un valor fijo
+      bookListOutter.scrollTop += 20 // Ajusta este valor según sea necesario
 
       // update scrollbar
       let percentage = bookListOutter.scrollTop / (innerSize - outterSize)
