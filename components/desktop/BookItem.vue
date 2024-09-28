@@ -29,7 +29,12 @@ export default {
   methods: {
     onBookClick(id) {
       this.$store.commit('setSelectedBook', id)
-      document.querySelector('#book-list').scrollTop = 0
+      this.$nextTick(() => {
+        const bookList = document.querySelector('#book-list-desktop')
+        if (bookList) {
+          bookList.scrollTop = 0
+        }
+      })
     },
   },
 }
