@@ -10,7 +10,7 @@
           :isSelected='book.id == selectedBook'
         )
   .book-item-list-scrollbar-outter
-  .book-item-list-scrollbar-inner
+  .book-item-list-scrollbar-inner(@mousedown='startDragging')
 </template>
 
 <script>
@@ -18,12 +18,30 @@ export default {
   mounted() {
     document.querySelector('.book-item-list-container').scrollTop = 0
     requestAnimationFrame(this.onUpdate)
+    // Agregar event listeners globales
+    document.addEventListener('mousemove', this.onDrag)
+    document.addEventListener('mouseup', this.stopDragging)
+  },
+
+  beforeDestroy() {
+    // Remover event listeners globales
+    document.removeEventListener('mousemove', this.onDrag)
+    document.removeEventListener('mouseup', this.stopDragging)
   },
 
   computed: {
     selectedBook() {
       return this.$store.state.selectedBook
     },
+  },
+
+  data() {
+    return {
+      isDragging: false,
+      startY: 0,
+      startScrollTop: 0,
+      draggedBook: null,
+    }
   },
 
   methods: {
@@ -44,23 +62,78 @@ export default {
       requestAnimationFrame(this.onUpdate)
     },
 
+    startDragging(e) {
+      this.isDragging = true
+      this.startY = e.clientY
+      this.startScrollTop = document.querySelector('.book-item-list-container').scrollTop
+    },
+
+    stopDragging() {
+      this.isDragging = false
+    },
+
+    onDrag(e) {
+      if (!this.isDragging) return
+
+      const bookListOutter = document.querySelector('.book-item-list-container')
+      const bookListInner = document.querySelector('.book-list-inner')
+      const scrollbarOutter = document.querySelector('.book-item-list-scrollbar-outter')
+      const scrollbarInner = document.querySelector('.book-item-list-scrollbar-inner')
+
+      const deltaY = e.clientY - this.startY
+      const scrollbarRatio = (scrollbarOutter.offsetHeight - scrollbarInner.offsetHeight) / (bookListInner.offsetHeight - bookListOutter.offsetHeight)
+      
+      const newScrollTop = this.startScrollTop + (deltaY / scrollbarRatio)
+      bookListOutter.scrollTop = newScrollTop
+
+      this.updateScrollbarPosition()
+    },
+
+    updateScrollbarPosition() {
+      const bookListOutter = document.querySelector('.book-item-list-container')
+      const bookListInner = document.querySelector('.book-list-inner')
+      const scrollbarInner = document.querySelector('.book-item-list-scrollbar-inner')
+      const scrollbarOutter = document.querySelector('.book-item-list-scrollbar-outter')
+
+      const percentage = bookListOutter.scrollTop / (bookListInner.offsetHeight - bookListOutter.offsetHeight)
+      const scrollBarInnerHeight = scrollbarInner.offsetHeight
+      const scrollbarOutterHeight = scrollbarOutter.offsetHeight
+
+      const pos = 10 + percentage * (scrollbarOutterHeight - scrollBarInnerHeight)
+      scrollbarInner.style.top = pos + 'px'
+    },
+
     onBookListWheel(e) {
-      let bookListOutter = document.querySelector('.book-item-list-container')
-      let bookListInner = document.querySelector('.book-list-inner')
-      let outterSize = bookListOutter.offsetHeight
-      let innerSize = bookListInner.offsetHeight
+      const bookListOutter = document.querySelector('.book-item-list-container')
+      const bookListInner = document.querySelector('.book-list-inner')
+      const outterSize = bookListOutter.offsetHeight
+      const innerSize = bookListInner.offsetHeight
 
-      // scroll content con un valor fijo
-      bookListOutter.scrollTop += 20 // Ajusta este valor según sea necesario
+      // Determinar la dirección del scroll
+      const scrollDirection = e.deltaY > 0 ? 1 : -1
+      
+      // Scroll content con un valor fijo
+      const scrollAmount = 3 * scrollDirection
+      bookListOutter.scrollTop += scrollAmount
 
-      // update scrollbar
-      let percentage = bookListOutter.scrollTop / (innerSize - outterSize)
-      let scrollbarInner = document.querySelector('.book-item-list-scrollbar-inner')
-      let scrollbarOutter = document.querySelector('.book-item-list-scrollbar-outter')
-      let scrollBarInnerHeight = scrollbarInner.offsetHeight
-      let scrollbarOutterHeight = scrollbarOutter.offsetHeight
+      // Asegurarse de que el scroll no exceda los límites
+      bookListOutter.scrollTop = Math.max(0, Math.min(bookListOutter.scrollTop, innerSize - outterSize))
 
-      let pos = 10 + percentage * (scrollbarOutterHeight - scrollBarInnerHeight)
+      this.updateScrollbarPosition()
+    },
+
+    updateScrollbarPosition() {
+      const bookListOutter = document.querySelector('.book-item-list-container')
+      const bookListInner = document.querySelector('.book-list-inner')
+      const scrollbarInner = document.querySelector('.book-item-list-scrollbar-inner')
+      const scrollbarOutter = document.querySelector('.book-item-list-scrollbar-outter')
+
+      const percentage = bookListOutter.scrollTop / (bookListInner.offsetHeight - bookListOutter.offsetHeight)
+      const scrollBarInnerHeight = scrollbarInner.offsetHeight
+      const scrollbarOutterHeight = scrollbarOutter.offsetHeight
+
+      const maxTop = scrollbarOutterHeight - scrollBarInnerHeight
+      const pos = Math.max(10, Math.min(10 + percentage * maxTop, maxTop + 10))
       scrollbarInner.style.top = pos + 'px'
     },
   },
@@ -101,4 +174,5 @@ export default {
     height: 80px
     border: 1px solid #898A7D
     background: #FFFF84
+    cursor: pointer
 </style>

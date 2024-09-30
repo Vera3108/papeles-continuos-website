@@ -7,7 +7,7 @@
         template(v-for='tag in tags')
           desktop-tag(:name='tag.name', :amount='tag.amount', v-show='tag.amount > 0')
   .tag-list-scrollbar-outter
-  .tag-list-scrollbar-inner
+  .tag-list-scrollbar-inner(@mousedown='startDragging')
 </template>
 
 <script>
@@ -15,6 +15,15 @@ export default {
   mounted() {
     document.querySelector('.tag-list-outter').scrollTop = 0
     requestAnimationFrame(this.onUpdate)
+    // Agregar event listeners globales
+    document.addEventListener('mousemove', this.onDrag)
+    document.addEventListener('mouseup', this.stopDragging)
+  },
+
+  beforeDestroy() {
+    // Remover event listeners globales
+    document.removeEventListener('mousemove', this.onDrag)
+    document.removeEventListener('mouseup', this.stopDragging)
   },
 
   computed: {
@@ -34,12 +43,18 @@ export default {
     },
   },
 
+  data() {
+    return {
+      isDragging: false,
+      startY: 0,
+      startScrollTop: 0,
+    }
+  },
+
   methods: {
     onUpdate() {
       const scrollBarOutter = document.querySelector('.tag-list-scrollbar-outter')
-
       const scrollBarInner = document.querySelector('.tag-list-scrollbar-inner')
-
       const tagListInner = document.querySelector('.tag-list-inner')
 
       if (tagListInner.offsetHeight > 90) {
@@ -54,24 +69,65 @@ export default {
       requestAnimationFrame(this.onUpdate)
     },
 
-    onTagListWheel(e) {
-      let tagListOutter = document.querySelector('.tag-list-outter')
-      let tagListInner = document.querySelector('.tag-list-inner')
-      let outterSize = tagListOutter.offsetHeight
-      let innerSize = tagListInner.offsetHeight
+    startDragging(e) {
+      this.isDragging = true
+      this.startY = e.clientY
+      this.startScrollTop = document.querySelector('.tag-list-outter').scrollTop
+    },
 
-      // scroll content
-      tagListOutter.scrollTop += e.deltaY / 10
+    stopDragging() {
+      this.isDragging = false
+    },
 
-      // update scrollbar
-      let percentage = tagListOutter.scrollTop / (innerSize - outterSize)
-      let scrollbarInner = document.querySelector('.tag-list-scrollbar-inner')
-      let scrollbarOutter = document.querySelector('.tag-list-scrollbar-outter')
-      let scrollBarInnerHeight = scrollbarInner.offsetHeight
-      let scrollbarOutterHeight = scrollbarOutter.offsetHeight
+    onDrag(e) {
+      if (!this.isDragging) return
 
-      let pos = 27 + percentage * (scrollbarOutterHeight - scrollBarInnerHeight)
+      const tagListOutter = document.querySelector('.tag-list-outter')
+      const tagListInner = document.querySelector('.tag-list-inner')
+      const scrollbarOutter = document.querySelector('.tag-list-scrollbar-outter')
+      const scrollbarInner = document.querySelector('.tag-list-scrollbar-inner')
+
+      const deltaY = e.clientY - this.startY
+      const scrollbarRatio = (scrollbarOutter.offsetHeight - scrollbarInner.offsetHeight) / (tagListInner.offsetHeight - tagListOutter.offsetHeight)
+      
+      const newScrollTop = this.startScrollTop + (deltaY / scrollbarRatio)
+      tagListOutter.scrollTop = newScrollTop
+
+      this.updateScrollbarPosition()
+    },
+
+    updateScrollbarPosition() {
+      const tagListOutter = document.querySelector('.tag-list-outter')
+      const tagListInner = document.querySelector('.tag-list-inner')
+      const scrollbarInner = document.querySelector('.tag-list-scrollbar-inner')
+      const scrollbarOutter = document.querySelector('.tag-list-scrollbar-outter')
+
+      const percentage = tagListOutter.scrollTop / (tagListInner.offsetHeight - tagListOutter.offsetHeight)
+      const scrollBarInnerHeight = scrollbarInner.offsetHeight
+      const scrollbarOutterHeight = scrollbarOutter.offsetHeight
+
+      const maxTop = scrollbarOutterHeight - scrollBarInnerHeight
+      const pos = Math.max(27, Math.min(27 + percentage * maxTop, maxTop + 27))
       scrollbarInner.style.top = pos + 'px'
+    },
+
+    onTagListWheel(e) {
+      const tagListOutter = document.querySelector('.tag-list-outter')
+      const tagListInner = document.querySelector('.tag-list-inner')
+      const outterSize = tagListOutter.offsetHeight
+      const innerSize = tagListInner.offsetHeight
+
+      // Determinar la dirección del scroll
+      const scrollDirection = e.deltaY > 0 ? 1 : -1
+      
+      // Scroll content con un valor fijo
+      const scrollAmount = 3 * scrollDirection
+      tagListOutter.scrollTop += scrollAmount
+
+      // Asegurarse de que el scroll no exceda los límites
+      tagListOutter.scrollTop = Math.max(0, Math.min(tagListOutter.scrollTop, innerSize - outterSize))
+
+      this.updateScrollbarPosition()
     },
   },
 }
@@ -116,4 +172,5 @@ export default {
     height: 60px
     border: 1px solid #898A7D
     background: #FFFF84
+    cursor: pointer
 </style>
