@@ -74,14 +74,57 @@ export default {
     },
 
     drawLine(page, p1, p2, width, height, color) {
-      let p1x = p1[0] * width
-      let p1y = height - p1[1] * height
-      let p2x = p2[0] * width
-      let p2y = height - p2[1] * height
+      // Ajuste de coordenadas considerando la rotación de la página en el PDF.
+      // En pantalla (pdf.js + p5) se ve con la rotación aplicada y origen arriba-izquierda,
+      // pero al dibujar con pdf-lib el origen es abajo-izquierda y la rotación de página
+      // no se aplica a las coordenadas de dibujo, por lo que debemos compensarla.
+
+      // Rotación efectiva de la página (múltiplos de 90)
+      // Normalizamos rotación a 0,90,180,270 en rango [0,360)
+      const angle = page.getRotation().angle || 0
+      const rotation = ((angle % 360) + 360) % 360
+
+      // Usar CropBox para coincidir con lo que renderiza pdf.js (puede diferir del MediaBox)
+      const crop = page.getCropBox ? page.getCropBox() : { x: 0, y: 0, width, height }
+
+      // Tamaño del contenido sin rotación (CropBox)
+      const unrotatedW = crop.width
+      const unrotatedH = crop.height
+
+      // Tamaño visible con rotación aplicada
+      const visibleW = rotation === 90 || rotation === 270 ? unrotatedH : unrotatedW
+      const visibleH = rotation === 90 || rotation === 270 ? unrotatedW : unrotatedH
+
+      // Coordenadas en el sistema rotado (origen abajo-izquierda del render rotado)
+      const xr1 = p1[0] * visibleW
+      const yr1 = visibleH - p1[1] * visibleH
+      const xr2 = p2[0] * visibleW
+      const yr2 = visibleH - p2[1] * visibleH
+
+      // Transformar a sistema no rotado (origen abajo-izquierda sin rotación)
+      const toUnrotated = (xr, yr) => {
+        switch (rotation) {
+          case 90:
+            // Fórmula que mantuvo la rotación correcta anteriormente
+            return { x: unrotatedW - yr, y: xr }
+          case 180:
+            return { x: unrotatedW - xr, y: unrotatedH - yr }
+          case 270:
+            return { x: yr, y: unrotatedH - xr }
+          default:
+            return { x: xr, y: yr }
+        }
+      }
+
+      // Sumar offset del CropBox para posicionar en coords de página
+      const p1uRel = toUnrotated(xr1, yr1)
+      const p2uRel = toUnrotated(xr2, yr2)
+      const p1u = { x: p1uRel.x + crop.x, y: p1uRel.y + crop.y }
+      const p2u = { x: p2uRel.x + crop.x, y: p2uRel.y + crop.y }
 
       page.drawLine({
-        start: { x: p1x, y: p1y },
-        end: { x: p2x, y: p2y },
+        start: p1u,
+        end: p2u,
         color: color,
       })
     },
