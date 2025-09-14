@@ -1,0 +1,33 @@
+# dependencies
+node_modules/
+dist/
+build/
+
+# media files
+public/images/
+public/videos/
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
+*.mp4
+*.webm
+*.avi
+*.mov
+
+# data files
+*.json
+
+# lock files
+package-lock.json
+bun.lock
+
+# config files
+.env
+.env.local
+.env.production
+
+# other
+.DS_Store
+*.log 

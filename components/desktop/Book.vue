@@ -47,13 +47,13 @@ export default {
     },
 
     async download() {
-      const existingPdfBytes = await fetch(this.book.url).then(res => res.arrayBuffer())
+      const existingPdfBytes = await fetch(this.book.url).then((res) => res.arrayBuffer())
       const pdfDoc = await PDFDocument.load(existingPdfBytes)
 
       for (let i = 0; i < pdfDoc.getPages().length; i++) {
         const page = pdfDoc.getPages()[i]
         const { width, height } = page.getSize()
-        this.lines[i].forEach(line => {
+        this.lines[i].forEach((line) => {
           line.points.forEach((p1, index) => {
             if (index < line.points.length - 1) {
               let p2 = line.points[index + 1]
@@ -88,12 +88,14 @@ export default {
 
     hexToRgb(hex) {
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
-      return result ? {
-        type: 'RGB',
-        red: parseInt(result[1], 16) / 255,
-        green: parseInt(result[2], 16) / 255,
-        blue: parseInt(result[3], 16) / 255,
-      } : null
+      return result
+        ? {
+            type: 'RGB',
+            red: parseInt(result[1], 16) / 255,
+            green: parseInt(result[2], 16) / 255,
+            blue: parseInt(result[3], 16) / 255,
+          }
+        : null
     },
 
     createCanvases() {
@@ -126,10 +128,12 @@ export default {
             }
 
             currentLine.draw(p)
-            this.lines[i].forEach(line => line.draw(p))
+            this.lines[i].forEach((line) => line.draw(p))
           }
 
-          p.startLine = () => { isDrawing = true }
+          p.startLine = () => {
+            isDrawing = true
+          }
           p.endLine = () => {
             if (currentLine.points.length > 0) {
               this.lines[i].push(currentLine)
@@ -142,9 +146,15 @@ export default {
 
           let pageContainer = document.querySelector('#page-container-' + this.book.id + '-' + i)
 
-          pageContainer.addEventListener('mousedown', (e) => { if (e.button == 0) p.startLine() })
-          pageContainer.addEventListener('mouseup', (e) => { if (e.button == 0) p.endLine() })
-          pageContainer.addEventListener('mouseout', () => { if (isDrawing) p.endLine() })
+          pageContainer.addEventListener('mousedown', (e) => {
+            if (e.button == 0) p.startLine()
+          })
+          pageContainer.addEventListener('mouseup', (e) => {
+            if (e.button == 0) p.endLine()
+          })
+          pageContainer.addEventListener('mouseout', () => {
+            if (isDrawing) p.endLine()
+          })
 
           p.isElementOutViewport = (el) => {
             var rect = el.getBoundingClientRect()

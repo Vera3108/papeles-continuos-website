@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
@@ -25,7 +26,8 @@
     "webpack": "^4.46.0"
   },
   "devDependencies": {
-    "netlify-cms-app": "^2.15.68"
+    "netlify-cms-app": "^2.15.68",
+    "prettier": "^3.6.2"
   },
   "engines": {
     "node": "21.*"

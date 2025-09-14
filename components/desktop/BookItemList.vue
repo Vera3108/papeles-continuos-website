@@ -82,8 +82,8 @@ export default {
 
       const deltaY = e.clientY - this.startY
       const scrollbarRatio = (scrollbarOutter.offsetHeight - scrollbarInner.offsetHeight) / (bookListInner.offsetHeight - bookListOutter.offsetHeight)
-      
-      const newScrollTop = this.startScrollTop + (deltaY / scrollbarRatio)
+
+      const newScrollTop = this.startScrollTop + deltaY / scrollbarRatio
       bookListOutter.scrollTop = newScrollTop
 
       this.updateScrollbarPosition()
@@ -111,7 +111,7 @@ export default {
 
       // Determinar la dirección del scroll
       const scrollDirection = e.deltaY > 0 ? 1 : -1
-      
+
       // Scroll content con un valor fijo
       const scrollAmount = 3 * scrollDirection
       bookListOutter.scrollTop += scrollAmount
