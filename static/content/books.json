@@ -1,6 +1,14 @@
 {
   "books": [
     {
+      "date": "29 09 2025",
+      "id": "7",
+      "author": "Marisa Godínez",
+      "url": "/images/uploads/scanned-doc-1-.pdf",
+      "thumbnail": "/images/uploads/scanned-doc-2-.jpg",
+      "tags": "feminismo"
+    },
+    {
       "date": "28 09 2024",
       "id": "6",
       "author": "Bastarda Type",
@@ -39,14 +47,6 @@
       "author": "Verónica Majluf",
       "url": "/images/uploads/versión-final.pdf",
       "thumbnail": "/images/uploads/majluf-me-you-2.jpeg"
-    },
-    {
-      "date": "29 09 2025",
-      "id": "7",
-      "author": "Marisa Godínez",
-      "url": "/images/uploads/scanned-doc-1-.pdf",
-      "thumbnail": "/images/uploads/scanned-doc-2-.jpg",
-      "tags": "feminismo"
     }
   ]
 }
